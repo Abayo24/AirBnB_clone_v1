@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""calculator class"""
+
+
 class Calc:
     """calculator that adds subtracts, multiplies and divides only"""
     def add(a, b):
