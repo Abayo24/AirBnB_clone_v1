@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """base model"""
 from datetime import datetime
+from models.__init__ import storage
 import uuid
 
 
@@ -9,6 +10,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
+            storage.new(self)
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
@@ -29,6 +31,7 @@ class BaseModel:
         """updates the public instance attribute updated_at \
                 with the current datetime"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values \
@@ -54,11 +57,11 @@ if __name__ == "__main__":
         print("\t{}: ({}) - {}"
               .format(key, type(my_model_json[key]), my_model_json[key]))
 
-    # print("--")
-    # my_new_model = BaseModel(**my_model_json)
-    # print(my_new_model.id)
-    # print(my_new_model)
-    # print(type(my_new_model.created_at))
+    print("--")
+    my_new_model = BaseModel(**my_model_json)
+    print(my_new_model.id)
+    print(my_new_model)
+    print(type(my_new_model.created_at))
 
-    # print("--")
-    # print(my_model is my_new_model)
+    print("--") 
+    print(my_model is my_new_model)
