@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """base model"""
 from datetime import datetime
-from models.__init__ import storage
+import models
 import uuid
 
 
@@ -10,7 +10,6 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
-            storage.new(self)
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
@@ -23,15 +22,13 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
 
-    def __str__(self):
-        class_name = self.__class__.__name__
-        return f"[{class_name}] ({self.id}) {self.__dict__}"
+        models.storage.new(self)
 
     def save(self):
         """updates the public instance attribute updated_at \
                 with the current datetime"""
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values \
@@ -40,8 +37,12 @@ class BaseModel:
         base_dict['__class__'] = self.__class__.__name__
         base_dict['created_at'] = self.created_at.isoformat()
         base_dict['updated_at'] = self.updated_at.isoformat()
+        
         return base_dict
 
+    def __str__(self):
+        class_name = self.__class__.__name__
+        return f"[{class_name}] ({self.id}) {self.__dict__}"
 
 if __name__ == "__main__":
     my_model = BaseModel()
@@ -54,14 +55,4 @@ if __name__ == "__main__":
     print(my_model_json)
     print("JSON of my_model:")
     for key in my_model_json.keys():
-        print("\t{}: ({}) - {}"
-              .format(key, type(my_model_json[key]), my_model_json[key]))
-
-    print("--")
-    my_new_model = BaseModel(**my_model_json)
-    print(my_new_model.id)
-    print(my_new_model)
-    print(type(my_new_model.created_at))
-
-    print("--") 
-    print(my_model is my_new_model)
+        print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
