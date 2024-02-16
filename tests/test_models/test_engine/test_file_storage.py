@@ -72,13 +72,13 @@ class TestFileStorage(unittest.TestCase):
     def test_save_to_file(self):
         """tests saving objects to a file and check if file is created"""
         obj = BaseModel()
-        model.storage.new(obj)
+        models.storage.new(obj)
         models.storage.save()
         self.assertTrue(os.path.exists(models.storage._FileStorage__file_path))
 
     def test_reload_empty_file(self):
         """tests reloading when file is empty or doesnt exist"""
-        with self.assertRaise(TypeError):
+        with self.assertRaises(TypeError):
             models.storage()
             models.storage.reload()
 

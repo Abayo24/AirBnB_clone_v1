@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
 import unittest
+import datetime
+
 
 class TestBaseModel(unittest.TestCase):
     def test_init(self):
