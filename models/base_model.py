@@ -37,12 +37,13 @@ class BaseModel:
         base_dict['__class__'] = self.__class__.__name__
         base_dict['created_at'] = self.created_at.isoformat()
         base_dict['updated_at'] = self.updated_at.isoformat()
-        
+
         return base_dict
 
     def __str__(self):
         class_name = self.__class__.__name__
         return f"[{class_name}] ({self.id}) {self.__dict__}"
+
 
 if __name__ == "__main__":
     my_model = BaseModel()
@@ -55,4 +56,5 @@ if __name__ == "__main__":
     print(my_model_json)
     print("JSON of my_model:")
     for key in my_model_json.keys():
-        print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+        print("\t{}: ({}) - {}".format(
+            key, type(my_model_json[key]), my_model_json[key]))
