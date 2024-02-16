@@ -4,18 +4,22 @@
 
 class Calc:
     """calculator that adds subtracts, multiplies and divides only"""
+    @staticmethod
     def add(a, b):
         """adds two numbers"""
         return a + b
 
+    @staticmethod
     def subtract(a, b):
         """subtracts b from a"""
         return a - b
 
+    @staticmethod
     def multiply(a, b):
         """multiplies two numbers"""
         return a * b
 
+    @staticmethod
     def divide(a, b):
         """divides a by b"""
         if b == 0:
