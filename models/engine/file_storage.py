@@ -4,7 +4,6 @@ import json
 import os
 from models.base_model import BaseModel
 
-
 class FileStorage:
     """ serializes instances to a JSON file and deserializes JSON file to instances"""
     __file_path = 'file.json'
@@ -38,10 +37,10 @@ class FileStorage:
             with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
                 try:
                     object_dict = json.load(file)
-                    for key, value in object_dict.items():
-                        class_name, obj_id = key.split('.')
-                        class_obj = eval(class_name)
-                        instance = class_obj(**values)
-                        FileStorage.__objects[key] = instance
+                    for key in object_dict.items():
+                        cls_name, obj_id = key.split('.')
+                        cls = eval(cls_name)
+                        obj = cls(**object_dict)
+                        FileStorage.__objects[key] = obj
                 except Exception:
                     pass
