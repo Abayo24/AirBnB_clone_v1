@@ -50,5 +50,5 @@ class FileStorage:
                             self.new(instance)
                         else:
                             print(f"Unknown class {class_name} encountered.")
-                except Exception:
-                    print("Error occurred during deserialization")
+                except Exception as e:
+                    print(f"Error occurred during deserialization: {e}")
