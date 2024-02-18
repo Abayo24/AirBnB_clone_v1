@@ -44,9 +44,11 @@ class FileStorage:
                     object_dict = json.load(file)
                     for key, val in object_dict.items():
                         class_name = val['__class__']
-                        class_instance = classes[class_name]
-                        instance = class_instance(**val)
-                        all_objects = self.all()
-                        all_objects[key] = instance
+                        if class_name in classes:
+                            class_instance = classes[class_name]
+                            instance = class_instance(**val)
+                            FileStorage.__objects[key] = instance
+                        else:
+                            print(f"Unknown Class {class_name} encountered during deserialization.")
                 except Exception:
-                    pass
+                    print("Error occurred during deserialization")
