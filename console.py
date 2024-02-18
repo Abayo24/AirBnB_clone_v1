@@ -4,7 +4,7 @@ import cmd
 
 
 class HBNBCommand(cmd.Cmd):
-    """class HBNBCommand"""
+    """Command interpreter for HBNB project"""
     prompt = "(hbnb)"
 
     def do_quit(self, arg):
@@ -22,6 +22,11 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing on empty line"""
         pass
 
+    def default(self, line):
+        """Called on an input line when the command prefix is not recognized"""
+        if line.strip() == "":
+            return self.emptyline()
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     HBNBCommand().cmdloop()
