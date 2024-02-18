@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-""""""
+"""contains the entry point of the command interpreter"""
 import cmd
 
 
 class HBNBCommand(cmd.Cmd):
-    """"""
+    """class HBNBCommand"""
     prompt = "(hbnb)"
 
     def do_quit(self, arg):
