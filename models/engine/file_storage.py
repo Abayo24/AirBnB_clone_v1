@@ -37,7 +37,7 @@ class FileStorage:
         from models.base_model import BaseModel
 
         classes = {'BaseModel': BaseModel}
-        
+
         if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
                 try:
@@ -47,8 +47,8 @@ class FileStorage:
                         if class_name in classes:
                             class_instance = classes[class_name]
                             instance = class_instance(**val)
-                            FileStorage.__objects[key] = instance
+                            self.new(instance)
                         else:
-                            print(f"Unknown Class {class_name} encountered during deserialization.")
+                            print(f"Unknown class {class_name} encountered.")
                 except Exception:
                     print("Error occurred during deserialization")
